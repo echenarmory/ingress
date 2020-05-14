@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-for-demo
+spec:
+  rules:
+    http:
+      paths: /blue
+      - backend:
+          serviceName: blue-nginx
+          servicePort: 80
+    http:
+      paths: /green
+      - backend:
+          serviceName: green-nginx
+          servicePort: 80
+  - http:
+      paths:
+      - backend:
+          serviceName: default-nginx
+          servicePort: 80
