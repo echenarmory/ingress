@@ -6,9 +6,9 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    http:
+    - http:
       paths:
-      backend:
+      - backend:
         serviceName: nginx-default
         servicePort: 80
 ---
@@ -20,9 +20,9 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    http:
+    - http:
       paths:
-      backend:
+      - backend:
         serviceName: nginx-blue
         servicePort: 80
 ---
@@ -34,8 +34,8 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    http:
+    - http:
       paths:
-      backend:
+      - backend:
         serviceName: nginx-green
         servicePort: 80
