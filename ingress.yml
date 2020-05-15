@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: nginx-default
@@ -12,7 +12,7 @@ spec:
         serviceName: nginx-default
         servicePort: 80
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: nginx-blue
@@ -26,7 +26,7 @@ spec:
         serviceName: nginx-blue
         servicePort: 80
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: extentions/v1beta1
 kind: Ingress
 metadata:
   name: nginx-green
