@@ -7,15 +7,15 @@ spec:
     http:
       paths: /blue
       - backend:
-          serviceName: blue-nginx
+          serviceName: nginx-blue
           servicePort: 80
     http:
       paths: /green
       - backend:
-          serviceName: green-nginx
+          serviceName: nginx-green
           servicePort: 80
   - http:
       paths:
       - backend:
-          serviceName: default-nginx
+          serviceName: nginx-default
           servicePort: 80
