@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: ${#toInt( parameters.replicas )}
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx-default
+          image: "echenarmory/nginx_default"
+          ports:
+            - containerPort: 80
+        - name: nginx-blue
+          image: "echenarmory/nginx_blue"
+          ports:
+            - containerPort: 80
+        - name: nginx-green
+          image: "echenarmory/nginx_green"
+          ports:
+            - containerPort: 80
