@@ -21,7 +21,7 @@ spec:
             serviceName: nginx-green
             servicePort: 80
           path: /nginx-green
-  status:
-    loadBalancer:
-      ingress:
-      - hostname: abe11c1fe5a6211eab53706f3d4e40e5-469969934.us-west-2.elb.amazonaws.com
+status:
+  loadBalancer:
+    ingress:
+    - hostname: abe11c1fe5a6211eab53706f3d4e40e5-469969934.us-west-2.elb.amazonaws.com
