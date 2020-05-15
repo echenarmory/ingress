@@ -1,23 +1,38 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: ingress-for-demo
+  name: nginx-default
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
-  rules:
-    http:
-      paths: /blue
-      - backend:
-          serviceName: nginx-blue
-          servicePort: 80
-    http:
-      paths: /green
-      - backend:
-          serviceName: nginx-green
-          servicePort: 80
-  - http:
-      paths:
-      - backend:
-          serviceName: nginx-default
-          servicePort: 80
+  http:
+    paths:
+    backend:
+      serviceName: nginx-default
+      servicePort: 80
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-blue
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  http:
+    paths:
+    backend:
+      serviceName: nginx-blue
+      servicePort: 80
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-green
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  http:
+    paths:
+    backend:
+      serviceName: nginx-green
+      servicePort: 80

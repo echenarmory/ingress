@@ -2,27 +2,63 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nginx
-  name: nginx
+    app: nginx-default
+  name: nginx-default
 spec:
   replicas: ${#toInt( parameters.replicas )}
   selector:
     matchLabels:
-      app: nginx
+      app: nginx-default
   template:
     metadata:
       labels:
-        app: nginx
+        app: nginx-default
     spec:
       containers:
         - name: nginx-default
           image: "echenarmory/nginx_default:1.1"
           ports:
             - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-blue
+  name: nginx-blue
+spec:
+  replicas: ${#toInt( parameters.replicas )}
+  selector:
+    matchLabels:
+      app: nginx-blue
+  template:
+    metadata:
+      labels:
+        app: nginx-blue
+    spec:
+      containers:
         - name: nginx-blue
           image: "echenarmory/nginx_blue:latest"
           ports:
             - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-green
+  name: nginx-green
+spec:
+  replicas: ${#toInt( parameters.replicas )}
+  selector:
+    matchLabels:
+      app: nginx-green
+  template:
+    metadata:
+      labels:
+        app: nginx-green
+    spec:
+      containers:
         - name: nginx-green
           image: "echenarmory/nginx_green:latest"
           ports:
@@ -41,9 +77,12 @@ spec:
     run: nginx-default
   sessionAffinity: None
   type: NodePort
+---
+apiVersion: v1
+kind: Service
 metadata:
   name: nginx-blue
-spec: 
+spec:
   ports:
   - port: 80
     protocol: TCP
@@ -52,9 +91,12 @@ spec:
     run: nginx-blue
   sessionAffinity: None
   type: NodePort
+---
+apiVersion: v1
+kind: Service
 metadata:
   name: nginx-green
-spec: 
+spec:
   ports:
   - port: 80
     protocol: TCP
