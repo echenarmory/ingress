@@ -2,62 +2,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nginx-default
-  name: nginx-default
+    app: nginx
+  name: nginx
 spec:
   replicas: ${#toInt( parameters.replicas )}
   selector:
     matchLabels:
-      app: nginx-default
+      app: nginx
   template:
     metadata:
       labels:
-        app: nginx-default
+        app: nginx
     spec:
       containers:
         - name: nginx-default
           image: "echenarmory/nginx_default:1.1"
           ports:
             - containerPort: 80
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: nginx-blue
-  name: nginx-blue
-spec:
-  replicas: ${#toInt( parameters.replicas )}
-  selector:
-    matchLabels:
-      app: nginx-blue
-  template:
-    metadata:
-      labels:
-        app: nginx-blue
-    spec:
       containers:
         - name: nginx-blue
           image: "echenarmory/nginx_blue:latest"
           ports:
             - containerPort: 80
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: nginx-green
-  name: nginx-green
-spec:
-  replicas: ${#toInt( parameters.replicas )}
-  selector:
-    matchLabels:
-      app: nginx-green
-  template:
-    metadata:
-      labels:
-        app: nginx-green
-    spec:
       containers:
         - name: nginx-green
           image: "echenarmory/nginx_green:latest"
@@ -67,42 +33,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-default
+  name: nginx
 spec: 
   ports:
   - port: 80
     protocol: TCP
     targetPort: 80
   selector:
-    run: nginx-default
+    app: nginx
   sessionAffinity: None
-  type: NodePort
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx-blue
-spec:
-  ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    run: nginx-blue
-  sessionAffinity: None
-  type: NodePort
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx-green
-spec:
-  ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    run: nginx-green
-  sessionAffinity: None
-  type: NodePort
-
+  type: ClusterIP
