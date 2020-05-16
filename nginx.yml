@@ -16,17 +16,17 @@ spec:
     spec:
       containers:
         - name: nginx-default
-          image: "echenarmory/nginx_default:1.1"
+          image: "echenarmory/nginx_default:1.2"
           ports:
             - containerPort: 80
       containers:
         - name: nginx-blue
-          image: "echenarmory/nginx_blue:latest"
+          image: "echenarmory/nginx_blue:1.1"
           ports:
             - containerPort: 80
       containers:
         - name: nginx-green
-          image: "echenarmory/nginx_green:latest"
+          image: "echenarmory/nginx_green:1.1"
           ports:
             - containerPort: 80
 ---
